@@ -21,5 +21,35 @@
     <a href="https://www.linkedin.com/in/victorchiquetti/" rel="noopener">LinkedIn</a> ·
     <a href="https://cwdigitalmarketing.agency" rel="noopener">CW Digital Marketing</a>
   </p>
+  <script>
+    // Favicon que alterna entre VC preto e VC amarelo (PNG gerado no navegador).
+    (function () {
+      var frames = [["#111", "#fff"], ["#ffd400", "#111"]];
+      var urls = frames.map(function (f) {
+        var c = document.createElement("canvas");
+        c.width = c.height = 64;
+        var x = c.getContext("2d");
+        x.fillStyle = f[0];
+        x.beginPath();
+        x.roundRect ? x.roundRect(0, 0, 64, 64, 12) : x.rect(0, 0, 64, 64);
+        x.fill();
+        x.fillStyle = f[1];
+        x.font = "bold 30px 'Times New Roman', Times, serif";
+        x.textAlign = "center";
+        x.fillText("VC", 32, 43);
+        return c.toDataURL("image/png");
+      });
+      function set(url) {
+        document.querySelectorAll("link[rel~='icon']").forEach(function (l) { l.remove(); });
+        var l = document.createElement("link");
+        l.rel = "icon"; l.type = "image/png"; l.href = url;
+        document.head.appendChild(l);
+      }
+      set(urls[0]);
+      if (window.matchMedia("(prefers-reduced-motion: reduce)").matches) return;
+      var i = 0;
+      setInterval(function () { i = 1 - i; set(urls[i]); }, 1500);
+    })();
+  </script>
 </body>
 </html>
