@@ -24,7 +24,8 @@
   <script>
     // Favicon que alterna entre VC preto e VC amarelo (PNG gerado no navegador).
     (function () {
-      var frames = [["#111", "#fff"], ["#ffd400", "#111"]];
+      // Cada quadro: fundo, cor do texto, conteúdo. VC preto, mão no preto, VC amarelo, mão no amarelo.
+      var frames = [["#111", "#fff", "VC"], ["#111", "#fff", "\ud83d\udc4b"], ["#ffd400", "#111", "VC"], ["#ffd400", "#111", "\ud83d\udc4b"]];
       var urls = frames.map(function (f) {
         var c = document.createElement("canvas");
         c.width = c.height = 64;
@@ -34,9 +35,14 @@
         x.roundRect ? x.roundRect(0, 0, 64, 64, 12) : x.rect(0, 0, 64, 64);
         x.fill();
         x.fillStyle = f[1];
-        x.font = "bold 30px 'Times New Roman', Times, serif";
         x.textAlign = "center";
-        x.fillText("VC", 32, 43);
+        if (f[2] === "VC") {
+          x.font = "bold 30px 'Times New Roman', Times, serif";
+          x.fillText("VC", 32, 43);
+        } else {
+          x.font = "40px sans-serif";
+          x.fillText(f[2], 32, 46);
+        }
         return c.toDataURL("image/png");
       });
       function set(url) {
@@ -48,7 +54,7 @@
       set(urls[0]);
       if (window.matchMedia("(prefers-reduced-motion: reduce)").matches) return;
       var i = 0;
-      setInterval(function () { i = 1 - i; set(urls[i]); }, 1500);
+      setInterval(function () { i = (i + 1) % urls.length; set(urls[i]); }, 1200);
     })();
   </script>
 </body>
