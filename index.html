@@ -24,8 +24,8 @@
   <script>
     // Favicon que alterna entre VC preto e VC amarelo (PNG gerado no navegador).
     (function () {
-      // Cada quadro: fundo, cor do texto, conteúdo. VC preto, mão no preto, VC amarelo, mão no amarelo.
-      var frames = [["#111", "#fff", "VC"], ["#111", "#fff", "\ud83d\udc4b"], ["#ffd400", "#111", "VC"], ["#ffd400", "#111", "\ud83d\udc4b"]];
+      // Cada quadro: fundo, cor do texto, conteúdo. VC preto, mão no preto, VC amarelo, mão no branco.
+      var frames = [["#111", "#fff", "VC"], ["#111", "#fff", "\ud83d\udc4b"], ["#ffd400", "#111", "VC"], ["#fff", "#111", "\ud83d\udc4b"]];
       var urls = frames.map(function (f) {
         var c = document.createElement("canvas");
         c.width = c.height = 64;
